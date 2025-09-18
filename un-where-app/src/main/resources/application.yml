@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: un-where-app
+  # session
+  session:
+    store-type: redis
+    # 30 day
+    timeout: 2592000
+
+  # mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/un-where
+    username: root
+    password: 20041222
+
+  # redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      password:
+      ttl: 3600
+
+  profiles:
+    active: local
+
+server:
+  port: 9111
+  servlet:
+    context-path: /api
+    # 30 day
+    session:
+      cookie:
+        max-age: 2592000
+
+# openapi
+springdoc:
+  group-configs:
+    - group: 'default'
+      packages-to-scan: com.huaju.unwhereapp.controller
+
+# knife4j
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# dubbo
+dubbo:
+  registry:
+    address: nacos://127.0.0.1:8848?username=nacos&password=nacos
+    register-mode: instance
+  protocol:
+    name: tri
+    port: 50053
+  consumer:
+    timeout: 120000
+  provider:
+    timeout: 120000
